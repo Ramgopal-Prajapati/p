@@ -1,1026 +1,1789 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Core Java & Core Python | Samyak Computer Classes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        /* CSS Reset & Variables */
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent-java: #e74c3c;
-            --accent-python: #2ecc71;
-            --dark-bg: #121212;
-            --dark-card: #1e1e1e;
-            --dark-border: #333;
-            --text-primary: #f5f6fa;
-            --text-secondary: #b2bec3;
-            --success: #27ae60;
-            --warning: #f39c12;
-            --error: #e74c3c;
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(90deg, var(--accent-java), var(--accent-python));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        h2 {
-            margin-top: 2rem;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-        }
-
-        a {
-            color: var(--secondary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        a:hover {
-            color: var(--primary);
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: rgba(30, 30, 30, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--dark-border);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            font-weight: 500;
-            position: relative;
-        }
-
-        nav a:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        nav a:hover:after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 4rem 0;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(44, 62, 80, 0.1), rgba(52, 152, 219, 0.1));
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 3rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
-        }
-
-        /* Tabs Navigation */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-
-        .tab-button {
-            padding: 1rem 2rem;
-            background-color: var(--dark-card);
-            border: none;
-            border-radius: 8px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tab-button.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .tab-button:hover:not(.active) {
-            background-color: #2a2a2a;
-        }
-
-        /* Search Box */
-        .search-container {
-            margin: 2rem auto;
-            max-width: 600px;
-        }
-
-        .search-box {
-            display: flex;
-            background-color: var(--dark-card);
-            border-radius: 50px;
-            padding: 0.5rem;
-            border: 1px solid var(--dark-border);
-        }
-
-        .search-box input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-
-        .search-box input:focus {
-            outline: none;
-        }
-
-        .search-box button {
-            background: var(--primary);
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .search-box button:hover {
-            background: var(--secondary);
-        }
-
-        /* Topic Navigation */
-        .topic-nav {
-            position: sticky;
-            top: 80px;
-            background-color: var(--dark-card);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            z-index: 90;
-            border: 1px solid var(--dark-border);
-        }
-
-        .topic-nav h3 {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .topic-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .topic-link {
-            padding: 0.5rem 1rem;
-            background-color: #2a2a2a;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .topic-link:hover {
-            background-color: var(--primary);
-        }
-
-        /* Course Content */
-        .course-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .topic-card {
-            background-color: var(--dark-card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: var(--transition);
-            border: 1px solid var(--dark-border);
-        }
-
-        .topic-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .topic-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            gap: 0.8rem;
-        }
-
-        .topic-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .code-container {
-            position: relative;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .code-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #2d2d2d;
-            padding: 0.5rem 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-        }
-
-        .copy-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .copy-btn:hover {
-            color: var(--success);
-        }
-
-        pre {
-            margin: 0;
-            padding: 1rem;
-            background-color: #1a1a1a;
-            overflow-x: auto;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        code {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .code-explanation {
-            background-color: rgba(39, 174, 96, 0.1);
-            border-left: 4px solid var(--success);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 4px 4px 0;
-        }
-
-        /* Real-life Example */
-        .real-life-example {
-            background-color: rgba(243, 156, 18, 0.1);
-            border-left: 4px solid var(--warning);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 4px 4px 0;
-        }
-
-        .real-life-example h4 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--warning);
-        }
-
-        /* Branches Section */
-        .branches-section {
-            margin: 3rem 0;
-        }
-
-        .branches-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .branch-card {
-            background-color: var(--dark-card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: var(--transition);
-            border: 1px solid var(--dark-border);
-        }
-
-        .branch-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .branch-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            gap: 0.8rem;
-        }
-
-        .branch-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .branch-info {
-            margin-top: 1rem;
-        }
-
-        .branch-info p {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Coaching Details */
-        .coaching-details {
-            background: linear-gradient(135deg, rgba(44, 62, 80, 0.1), rgba(52, 152, 219, 0.1));
-            padding: 3rem;
-            border-radius: 20px;
-            margin: 3rem 0;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .feature-card {
-            background-color: var(--dark-card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid var(--dark-border);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        /* Projects Section */
-        .projects-section {
-            margin: 3rem 0;
-        }
-
-        .project-card {
-            background-color: var(--dark-card);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border: 1px solid var(--dark-border);
-        }
-
-        .project-card h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .project-icon {
-            color: var(--accent-java);
-        }
-
-        .python-project .project-icon {
-            color: var(--accent-python);
-        }
-
-        .project-card ul {
-            padding-left: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .project-card li {
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        /* Footer */
-        footer {
-            background-color: #0f0f0f;
-            padding: 3rem 0;
-            margin-top: 3rem;
-            border-top: 1px solid var(--dark-border);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .footer-section h3:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--primary);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 3rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .tab-button {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .topic-nav {
-                position: relative;
-                top: 0;
-            }
-            
-            .topic-links {
-                overflow-x: auto;
-                padding-bottom: 0.5rem;
-            }
-            
-            .course-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .branches-grid, .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .coaching-details {
-                padding: 1.5rem;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-            }
-        }
-
-        /* Utility Classes */
-        .hidden {
-            display: none;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--success);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; visibility: hidden; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Full Python Course — Ram sir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Reset and base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+      background: #17192b;
+      color: #e3e7ef;
+      min-height: 100vh;
+      line-height: 1.7;
+      transition: background 0.3s;
+    }
+    a { color: #7afcff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; background: #23244d; }
+    ::-webkit-scrollbar-thumb { background: #2b2c5a; border-radius: 7px; }
+
+    /* Branding/Nav */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      background: #1a1c34;
+      box-shadow: 0 2px 16px rgba(20,20,45,0.11);
+      z-index: 12;
+      position: sticky;
+      top: 0;
+    }
+    .navbar .brand {
+      display: flex;
+      align-items: center;
+      font-size: 1.6em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #a16fff;
+      gap: 16px;
+    }
+    .navbar .brand svg {
+      width: 38px; height: 38px;
+      vertical-align: middle;
+    }
+    .navbar .navlinks {
+      display: flex;
+      gap: 22px;
+    }
+    .navbar .navlinks a {
+      color: #7afcff;
+      font-weight: 500;
+      font-size: 1.08em;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
+    .navbar .navlinks a.active,
+    .navbar .navlinks a:hover {
+      color: #fff;
+      border-bottom: 2px solid #7afcff;
+    }
+
+    /* Layout */
+    .container {
+      display: flex;
+      min-height: calc(100vh - 68px);
+    }
+    .sidebar {
+      width: 300px;
+      background: #222349;
+      padding: 22px 0;
+      overflow-y: auto;
+      transition: left 0.33s cubic-bezier(.41,1.72,.68,.91);
+      position: sticky;
+      top: 66px;
+      height: calc(100vh - 66px);
+      z-index: 11;
+    }
+    .sidebar.hide { left: -320px; }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        position: fixed;
+        top: 66px;
+        left: -350px;
+        height: calc(100vh - 66px);
+        z-index: 100;
+        box-shadow: 2px 0 18px #0004;
+        transition: left 0.35s cubic-bezier(.41,1.72,.68,.91);
+      }
+      .sidebar.show { left: 0; }
+      .container { flex-direction: column; }
+    }
+
+    .sidebar h2 {
+      color: #a16fff;
+      font-size: 1.15em;
+      padding: 10px 30px 6px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+      user-select: none;
+    }
+    .sidebar ul {
+      list-style: none;
+      max-height: 900px;
+      padding: 0 4px 0 20px;
+    }
+    .sidebar ul li {
+      margin-bottom: 6px;
+      border-left: 3px solid transparent;
+      transition: border 0.2s;
+    }
+    .sidebar ul li.active,
+    .sidebar ul li:hover {
+      border-left: 3px solid #7afcff;
+      background: #212154;
+    }
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #e3e7ef;
+      padding: 6px 12px 6px 0;
+      border-radius: 6px;
+      font-size: 1em;
+      transition: background 0.13s, color 0.13s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar ul li a svg {
+      width: 18px; height: 18px; vertical-align: middle;
+      fill: #7afcff;
+    }
+
+    /* Sidebar Toggle */
+    .sidebar-toggle {
+      display: none;
+      margin-right: 1em;
+      background: none;
+      border: none;
+      outline: none;
+      color: #7afcff;
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 200;
+    }
+    @media (max-width: 900px) {
+      .sidebar-toggle {
+        display: block;
+      }
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 40px 40px 60px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      min-width: 0;
+      transition: padding 0.3s;
+    }
+    @media (max-width: 600px) {
+      .main-content { padding: 18px 5vw 40px 5vw; }
+      .sidebar { width: 86vw; }
+    }
+
+    /* Topic Card */
+    .card {
+      background: linear-gradient(120deg, #222349 60%, #231f39 100%);
+      border-radius: 18px;
+      box-shadow: 0 4px 36px -12px #0e1028cc;
+      padding: 34px 28px 28px 32px;
+      max-width: 950px;
+      margin: 0 auto;
+      transition: background 0.27s;
+      position: relative;
+      overflow: visible;
+      margin-bottom: 15px;
+      border: 1.5px solid #292c4b;
+      animation: fadeIn 0.7s cubic-bezier(.41,1.72,.68,.91);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(32px);}
+      to   { opacity: 1; transform: none;}
+    }
+    .card .card-header {
+      display: flex; align-items: center; gap: 13px;
+      margin-bottom: 15px;
+    }
+    .card .card-header .card-icon {
+      background: linear-gradient(135deg, #a16fff 40%, #7afcff 100%);
+      border-radius: 9px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 16px #a16fff44;
+    }
+    .card .card-header .card-title {
+      font-size: 1.27em;
+      color: #7afcff;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+    .card .card-header .card-tag {
+      padding: 3px 10px;
+      background: #141537;
+      color: #a16fff;
+      border-radius: 12px;
+      margin-left: 14px;
+      font-size: 0.95em;
+      font-weight: 600;
+    }
+
+    .card .card-section {
+      margin-bottom: 15px;
+    }
+    .card .card-section:last-child { margin-bottom: 0;}
+    .card .section-title {
+      font-size: 1.05em;
+      color: #7afcff;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+    .card .theory {
+      color: #e3e7ef;
+      margin-bottom: 13px;
+      font-size: 1.04em;
+    }
+    .card .reallife {
+      background: #25264a;
+      border-left: 4px solid #a16fff;
+      border-radius: 7px;
+      padding: 11px 13px 10px 17px;
+      margin-bottom: 10px;
+      font-size: 1.01em;
+      color: #97d1ff;
+    }
+
+    /* Code Block */
+    pre, code {
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      background: none;
+      font-size: 1em;
+      color: #e3e7ef;
+    }
+    .code-block {
+      position: relative;
+      margin: 13px 0 15px 0;
+      background: #191a2c;
+      border-radius: 7px;
+      overflow: auto;
+      border: 1px solid #232458;
+      box-shadow: 0 2px 12px #14164033;
+    }
+    .code-block pre {
+      margin: 0;
+      padding: 18px 12px 13px 16px;
+      font-size: 1.05em;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .copy-btn {
+      position: absolute; top: 10px; right: 14px;
+      background: linear-gradient(135deg, #a16fff 40%, #7afcff 100%);
+      color: #23244d;
+      border: none;
+      outline: none;
+      padding: 4px 11px 4px 8px;
+      border-radius: 6px;
+      font-size: 1.05em;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.18s, color 0.18s;
+      opacity: 0.87;
+    }
+    .copy-btn:active { opacity: 0.67; }
+    .copy-btn svg { width: 1.1em; height: 1.1em; fill: #222349; }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .card { padding: 20px 10px 14px 12px; }
+      .main-content { gap: 23px; }
+    }
+    @media (max-width: 600px) {
+      .card { padding: 13px 3vw 10px 4vw; }
+      .main-content { padding: 8px 0 30px 0; }
+      .navbar { padding: 9px 3vw; }
+    }
+
+    /* Animations */
+    .sidebar,
+    .main-content,
+    .card { transition: background 0.25s, box-shadow 0.25s; }
+
+    /* SVG Icon Style */
+    .card-icon svg, .sidebar svg { display: inline-block; vertical-align: middle; }
+
+    /* Misc */
+    .footer {
+      font-size: 1em;
+      color: #a16fff;
+      padding: 26px 0 16px;
+      text-align: center;
+      opacity: 0.75;
+    }
+    .sidebar .sidebar-section {
+      margin-bottom: 25px;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <div class="logo-icon"><i class="fas fa-laptop-code"></i></div>
-                <h2>Samyak Computer Classes</h2>
-            </div>
-           
-        </div>
-    </header>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <button class="sidebar-toggle" id="sidebarToggle" title="Show topics">&#9776;</button>
+    <span class="brand">
+      <!-- Python logo SVG -->
+      <svg viewBox="0 0 50 50">
+        <circle cx="25" cy="25" r="25" fill="#2d325a"/>
+        <g>
+          <path fill="#a16fff" d="M15 18 q7-10 20 0 v7 h-10 v5 h10 q2 0 2 2 v4 q-2 7-10 7 h-9 q-7 0-7-7 v-7 q0-7 7-7 z"/>
+          <circle fill="#fff" cx="19.5" cy="21" r="2"/>
+        </g>
+        <g>
+          <path fill="#7afcff" d="M35 32 q-7 10-20 0 v-7 h10 v-5 h-10 q-2 0-2-2 v-4 q2-7 10-7 h9 q7 0 7 7 v7 q0 7-7 7 z"/>
+          <circle fill="#fff" cx="30.5" cy="29" r="2"/>
+        </g>
+      </svg>
+      By Ram sir
+    </span>
+    <span class="navlinks">
+      <a href="#core-python" class="active">Core Python</a>
+      <a href="#advanced-python">Advanced Python</a>
+    </span>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Master Core Java & Core Python</h1>
-            <p>Join Samyak Computer Classes, Indore's premier computer education institute with 4 branches across the city. Become job-ready with our comprehensive programming courses.</p>
-            <a href="#course-content" class="cta-button">Explore Courses <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </section>
+  <!-- Main Layout -->
+  <div class="container">
+    <!-- Sidebar (Collapsible) -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <h2>Core Python</h2>
+        <ul id="coreTopics">
+          <!-- JS inserts core topics here -->
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h2>Advanced Python</h2>
+        <ul id="advTopics">
+          <!-- JS inserts advanced topics here -->
+        </ul>
+      </div>
+    </aside>
 
-    <!-- Tabs Navigation -->
-    <div class="container">
-        <div class="tabs">
-            <button class="tab-button active" data-tab="java">
-                <i class="fab fa-java"></i> Core Java
-            </button>
-            <button class="tab-button" data-tab="python">
-                <i class="fab fa-python"></i> Core Python
-            </button>
-        </div>
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+      <!-- JS inserts cards here -->
+    </main>
+  </div>
 
-        <!-- Topic Navigation -->
-       
-        <!-- Search Box -->
-        <div class="search-container">
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="Search topics...">
-                <button id="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
+  <div class="footer">
+    &copy; 2025 DeviX Solutions. All rights reserved.
+  </div>
 
-        <!-- Course Content -->
-        <section id="course-content">
-            <div class="course-content">
-                <!-- Java Topics (same as before) -->
-                <div class="topic-card java-topic" id="intro">
-                    <div class="topic-header">
-                        <div class="topic-icon"><i class="fas fa-coffee"></i></div>
-                        <h3 class="topic-title">Java Introduction</h3>
-                    </div>
-                    <p>Java is a high-level, object-oriented programming language known for its portability and robustness.</p>
-                    <div class="code-container">
-                        <div class="code-header">
-                            <span>HelloWorld.java</span>
-                            <button class="copy-btn"><i class="far fa-copy"></i> Copy</button>
-                        </div>
-                        <pre><code>public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
+  <script>
+    // --- Topics Data ---
+
+    const corePythonTopics = [
+      {
+        id: "variables",
+        title: "Variables",
+        icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#a16fff"/><text x="8" y="17" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">x=5</text></svg>`,
+        tag: "Core",
+        theory: `Variables are named containers used to store data in Python. Python is dynamically typed, so you don't need to declare the type explicitly. Variable names are case-sensitive and should start with a letter or underscore.`,
+        code: `x = 5
+name = "Ram"
+PI = 3.14159
+_is_active = True`,
+        real: `# Store and display a user's age
+user_age = 28
+print(f"User's age is {user_age}")`
+      },
+      {
+        id: "data-types",
+        title: "Data Types",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="#7afcff"/><text x="7" y="16" font-size="9" fill="#17192b" font-family="monospace" font-weight="700">int</text></svg>`,
+        tag: "Core",
+        theory: `Python provides several built-in data types: <b>int</b> (integer), <b>float</b> (decimal), <b>str</b> (string), <b>bool</b>, <b>list</b>, <b>tuple</b>, <b>set</b>, <b>dict</b>, etc.`,
+        code: `a = 10           # int
+b = 3.14         # float
+c = "Hello"      # str
+d = True         # bool
+e = [1, 2, 3]    # list
+f = (1, 2, 3)    # tuple
+g = {1, 2, 3}    # set
+h = {'a': 1}     # dict`,
+        real: `# Check if a user's age is above 18
+user = {"name": "Amit", "age": 22}
+if user["age"] > 18:
+    print(user["name"], "is an adult")`
+      },
+      {
+        id: "operators",
+        title: "Operators",
+        icon: `<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="#a16fff"/><text x="7" y="16" font-size="12" fill="#17192b" font-family="monospace" font-weight="700">+</text></svg>`,
+        tag: "Core",
+        theory: `Operators perform operations on variables and values. Types include arithmetic (<b>+</b>, <b>-</b>, <b>*</b>, <b>/</b>), assignment (<b>=</b>, <b>+=</b>), comparison (<b>==</b>, <b>!=</b>), logical (<b>and</b>, <b>or</b>, <b>not</b>), bitwise, etc.`,
+        code: `a = 5 + 2    # 7
+b = 6 * 3    # 18
+c = 10 / 3   # 3.333...
+d = 10 // 3  # 3 (floor division)
+e = 7 % 3    # 1 (modulo)
+f = 2 ** 3   # 8 (power)
+g = (a > b) or (c < d)`,
+        real: `# Price calculation with discount
+price = 1000
+discount = 0.1
+final_price = price - (price * discount)
+print("Payable:", final_price)`
+      },
+      {
+        id: "conditions",
+        title: "Conditional Statements",
+        icon: `<svg viewBox="0 0 24 24"><polygon points="3,21 12,3 21,21" fill="#7afcff"/><text x="8" y="18" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">if</text></svg>`,
+        tag: "Core",
+        theory: `Conditional statements control flow based on conditions using <b>if</b>, <b>elif</b>, and <b>else</b>. Indentation is used to define code blocks.`,
+        code: `temp = 25
+if temp > 30:
+    print("Hot")
+elif temp > 20:
+    print("Warm")
+else:
+    print("Cold")`,
+        real: `# Check login
+username = "Ram"
+if username == "Ram":
+    print("Welcome, Ram!")`
+      },
+      {
+        id: "loops",
+        title: "Loops",
+        icon: `<svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0116 0" stroke="#a16fff" stroke-width="2" fill="none"/><path d="M20 12a8 8 0 01-16 0" stroke="#7afcff" stroke-width="2" fill="none"/><text x="9" y="19" font-size="9" fill="#17192b" font-family="monospace" font-weight="700">for</text></svg>`,
+        tag: "Core",
+        theory: `Loops are used to repeat code. <b>for</b> loops iterate over sequences, <b>while</b> loops repeat as long as a condition is true.`,
+        code: `for i in range(3):
+    print(i)
+    
+count = 0
+while count < 3:
+    print(count)
+    count += 1`,
+        real: `# Print all items in a shopping list
+shopping = ["Milk", "Eggs", "Bread"]
+for item in shopping:
+    print(item)`
+      },
+      {
+        id: "functions",
+        title: "Functions",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#a16fff"/><text x="7" y="16" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">def</text></svg>`,
+        tag: "Core",
+        theory: `Functions allow code reuse and modularity. Defined using <b>def</b> keyword. They can take arguments and return values.`,
+        code: `def greet(name):
+    return f"Hello, {name}!"
+
+msg = greet("DeviX")
+print(msg)`,
+        real: `# Add two numbers entered by user
+def add(a, b):
+    return a + b
+
+num1 = int(input("First: "))
+num2 = int(input("Second: "))
+print("Sum:", add(num1, num2))`
+      },
+      {
+        id: "oop",
+        title: "Object-Oriented Programming (OOP)",
+        icon: `<svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="5" fill="#7afcff"/><rect x="12" y="7" width="7" height="10" rx="3.5" fill="#a16fff"/></svg>`,
+        tag: "Core",
+        theory: `OOP organizes code with classes and objects. Classes define blueprints; objects are instances. Main concepts: encapsulation, inheritance, polymorphism, abstraction.`,
+        code: `class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def greet(self):
+        print("Hello,", self.name)
+
+p = Person("Ram")
+p.greet()`,
+        real: `# Bank account class
+class Account:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.balance = balance
+    def deposit(self, amt):
+        self.balance += amt
+    def withdraw(self, amt):
+        if amt <= self.balance:
+            self.balance -= amt
+            return True
+        return False
+
+acc = Account("Amit", 500)
+acc.deposit(200)
+acc.withdraw(100)
+print(acc.owner, acc.balance)`
+      },
+      {
+        id: "file-handling",
+        title: "File Handling",
+        icon: `<svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3" fill="#a16fff"/><rect x="8" y="7" width="8" height="2" rx="1" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `Python can read and write files using the <b>open()</b> function. Modes include 'r' (read), 'w' (write), 'a' (append), etc. Always close files or use <b>with</b> statement.`,
+        code: `with open("data.txt", "w") as f:
+    f.write("Hello World")  # write to file
+
+with open("data.txt", "r") as f:
+    text = f.read()
+    print(text)  # read from file`,
+        real: `# Save user input to file
+user_note = input("Write note: ")
+with open("notes.txt", "a") as f:
+    f.write(user_note + "\\n")`
+      },
+      {
+        id: "exception-handling",
+        title: "Exception Handling",
+        icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#7afcff"/><text x="9" y="17" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">try</text></svg>`,
+        tag: "Core",
+        theory: `Exceptions are errors detected during execution. Use <b>try</b>, <b>except</b>, <b>finally</b> to handle exceptions and prevent crashes.`,
+        code: `try:
+    x = int(input("Number: "))
+    print(10 / x)
+except ZeroDivisionError:
+    print("Can't divide by zero!")
+except ValueError:
+    print("Invalid input!")`,
+        real: `# Open file safely
+try:
+    with open("config.json") as f:
+        config = f.read()
+except FileNotFoundError:
+    print("Config file missing.")`
+      },
+      {
+        id: "modules",
+        title: "Modules & Packages",
+        icon: `<svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="11" rx="2" fill="#7afcff"/><rect x="7" y="10" width="10" height="4" rx="1.5" fill="#a16fff"/></svg>`,
+        tag: "Core",
+        theory: `Modules are files with Python code (.py). Packages are folders with __init__.py. Use <b>import</b> to reuse code from other files or libraries.`,
+        code: `# math.py
+def add(a, b):
+    return a + b
+
+# main.py
+import math
+print(math.add(2, 3))`,
+        real: `# Use standard library module
+import random
+print(random.randint(1, 100))`
+      },
+      {
+        id: "standard-libraries",
+        title: "Standard Libraries",
+        icon: `<svg viewBox="0 0 24 24"><path d="M9 3h6a6 6 0 016 6v6a6 6 0 01-6 6H9a6 6 0 01-6-6V9a6 6 0 016-6z" fill="#a16fff"/><rect x="5" y="7" width="14" height="10" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `Python's standard library offers modules for math, random, datetime, os, sys, json, csv, re, etc. They simplify common programming tasks.`,
+        code: `import math
+print(math.sqrt(16))
+
+import datetime
+print(datetime.datetime.now())`,
+        real: `# Get current working directory
+import os
+print(os.getcwd())`
+      },
+      {
+        id: "strings",
+        title: "Strings",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="8" rx="4" fill="#7afcff"/><text x="7" y="17" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">str</text></svg>`,
+        tag: "Core",
+        theory: `Strings are text data in Python. Use single or double quotes. Strings are immutable. Many built-in methods for manipulation: <b>split()</b>, <b>join()</b>, <b>replace()</b>, <b>find()</b>, etc.`,
+        code: `s = "Python"
+print(s.upper())     # PYTHON
+print(s[1:4])        # yth
+print("Dev" in s)    # False`,
+        real: `# Capitalize all names in a list
+names = ["ram", "amit", "devi"]
+names = [n.capitalize() for n in names]
+print(names)`
+      },
+      {
+        id: "lists",
+        title: "Lists",
+        icon: `<svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="4" fill="#a16fff"/><rect x="7" y="9" width="10" height="2" rx="1" fill="#7afcff"/><rect x="7" y="13" width="10" height="2" rx="1" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `Lists are mutable sequences to store multiple items. Support indexing, slicing, methods like <b>append</b>, <b>remove</b>, <b>sort</b>, etc.`,
+        code: `nums = [1, 2, 3]
+nums.append(4)
+nums.remove(2)
+nums.sort()
+print(nums)`,
+        real: `# Store student marks and find average
+marks = [78, 82, 91, 67]
+avg = sum(marks) / len(marks)
+print("Average:", avg)`
+      },
+      {
+        id: "tuples",
+        title: "Tuples",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><ellipse cx="12" cy="12" rx="5" ry="3" fill="#a16fff"/></svg>`,
+        tag: "Core",
+        theory: `Tuples are immutable sequences. Use for fixed data. Support indexing, slicing, and can be nested.`,
+        code: `point = (4, 7)
+print(point[0])
+
+colors = ("red", "green", "blue")
+print(colors[1:])`,
+        real: `# Latitude and longitude as tuple
+loc = (28.6139, 77.2090)
+print("Lat:", loc[0], "Long:", loc[1])`
+      },
+      {
+        id: "sets",
+        title: "Sets",
+        icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="#7afcff"/><circle cx="16" cy="12" r="5" fill="#a16fff" opacity="0.7"/></svg>`,
+        tag: "Core",
+        theory: `Sets are unordered collections of unique items. Support set operations like union, intersection, difference, etc.`,
+        code: `a = {1, 2, 3}
+b = {2, 3, 4}
+print(a | b)  # union
+print(a & b)  # intersection
+print(a - b)  # difference`,
+        real: `# Remove duplicates from a list
+nums = [1,2,2,3,3,4]
+unique = set(nums)
+print(unique)`
+      },
+      {
+        id: "dicts",
+        title: "Dictionaries",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `Dictionaries are mutable mappings of key-value pairs. Keys must be unique and immutable.`,
+        code: `student = {"name": "Ram", "age": 20}
+student["grade"] = "A"
+print(student["name"])
+del student["age"]`,
+        real: `# Phonebook using dict
+phonebook = {"Ram": "1234", "Amit": "5678"}
+print(phonebook.get("Amit"))`
+      },
+      {
+        id: "input-output",
+        title: "Input & Output",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#7afcff"/><text x="7" y="16" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">IO</text></svg>`,
+        tag: "Core",
+        theory: `Use <b>input()</b> to get user input (always string). Use <b>print()</b> to display output. f-strings are used for formatting.`,
+        code: `name = input("Enter your name: ")
+print("Hello,", name)
+age = int(input("Age: "))
+print(f"You are {age} years old")`,
+        real: `# Simple calculator
+a = float(input("a = "))
+b = float(input("b = "))
+print("Sum:", a + b)`
+      },
+      {
+        id: "comprehensions",
+        title: "Comprehensions",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="6" rx="3" fill="#a16fff"/><rect x="8" y="11" width="8" height="2" rx="1" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `Comprehensions provide a concise way to create lists, sets, or dicts. List comprehensions are most common.`,
+        code: `squares = [x*x for x in range(5)]
+evens = [x for x in range(10) if x % 2 == 0]`,
+        real: `# All uppercase names
+names = ["ram", "amit", "devi"]
+caps = [n.upper() for n in names]
+print(caps)`
+      },
+      {
+        id: "lambda",
+        title: "Lambda Functions",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="8" ry="5" fill="#7afcff"/><text x="8" y="15" font-size="14" fill="#17192b" font-family="monospace" font-weight="700">λ</text></svg>`,
+        tag: "Core",
+        theory: `Lambdas are small anonymous functions using <b>lambda</b> keyword. Often used as arguments to map, filter, etc.`,
+        code: `add = lambda x, y: x + y
+print(add(2, 3))
+
+nums = [1, 2, 3, 4]
+squares = list(map(lambda n: n*n, nums))`,
+        real: `# Sort by last letter
+words = ["ram", "devi", "amit"]
+words.sort(key=lambda s: s[-1])
+print(words)`
+      },
+      {
+        id: "scope",
+        title: "Scope & Namespaces",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><ellipse cx="12" cy="12" rx="5" ry="3" fill="#7afcff" opacity="0.7"/></svg>`,
+        tag: "Core",
+        theory: `Scope refers to where variables are accessible. LEGB rule: Local, Enclosing, Global, Built-in. Use <b>global</b> and <b>nonlocal</b> to modify scopes.`,
+        code: `x = 10   # global
+
+def foo():
+    x = 5   # local
+    print(x)
+
+foo()
+print(x)`,
+        real: `# Counter with nonlocal
+def counter():
+    count = 0
+    def inc():
+        nonlocal count
+        count += 1
+        return count
+    return inc
+
+c = counter()
+print(c(), c())  # 1 2`
+      },
+      {
+        id: "arguments",
+        title: "Arguments & Parameters",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#7afcff"/><circle cx="12" cy="12" r="2.5" fill="#a16fff"/></svg>`,
+        tag: "Core",
+        theory: `Functions take arguments (inputs). Types: positional, keyword, default, variable-length (*args, **kwargs).`,
+        code: `def add(a, b=3):
+    return a + b
+
+def func(*args, **kwargs):
+    print(args, kwargs)
+
+print(add(2))
+func(1,2,x=3,y=4)`,
+        real: `# Flexible logger
+def log(msg, level="INFO"):
+    print(f"[{level}] {msg}")
+
+log("Server started")
+log("Disk full!", level="ERROR")`
+      },
+      {
+        id: "docstrings",
+        title: "Docstrings & Comments",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#a16fff"/><text x="7" y="16" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">#</text></svg>`,
+        tag: "Core",
+        theory: `Comments start with <b>#</b>. Docstrings are multi-line strings (triple quotes) at start of modules, classes, or functions. Used for documentation.`,
+        code: `# This is a comment
+def foo():
+    """This is a docstring explaining foo."""
+    pass`,
+        real: `# Good documentation
+def add(a, b):
+    """
+    Add two numbers and return the result.
+    """
+    return a + b`
+      },
+      {
+        id: "type-hints",
+        title: "Type Hints",
+        icon: `<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="5" fill="#7afcff"/><text x="10" y="17" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">int</text></svg>`,
+        tag: "Core",
+        theory: `Type hints specify variable and function return types, helping static analysis tools.`,
+        code: `def add(a: int, b: int) -> int:
+    return a + b
+
+age: int = 25`,
+        real: `# Function with type hints
+def greet(name: str) -> str:
+    return "Hello " + name`
+      },
+      {
+        id: "enumerate-zip",
+        title: "Enumerate & Zip",
+        icon: `<svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="4" fill="#a16fff"/><rect x="7" y="10" width="10" height="2" rx="1" fill="#7afcff"/><rect x="7" y="12" width="10" height="2" rx="1" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `<b>enumerate()</b> returns index and value from a list. <b>zip()</b> combines multiple sequences element-wise.`,
+        code: `nums = [10, 20, 30]
+for idx, val in enumerate(nums):
+    print(idx, val)
+
+a = [1,2,3]
+b = ['a','b','c']
+for x, y in zip(a, b):
+    print(x, y)`,
+        real: `# Assign roll numbers to students
+students = ["Ram", "Amit", "Devi"]
+for roll, name in enumerate(students, 1):
+    print(f"{roll}: {name}")`
+      },
+      {
+        id: "map-filter-reduce",
+        title: "Map, Filter, Reduce",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `<b>map()</b> applies a function to all items. <b>filter()</b> selects items matching a condition. <b>reduce()</b> (from functools) reduces a sequence to a value.`,
+        code: `nums = [1,2,3,4]
+doubles = list(map(lambda x: x*2, nums))
+evens = list(filter(lambda x: x%2==0, nums))
+from functools import reduce
+total = reduce(lambda a,b: a+b, nums)`,
+        real: `# Filter passing marks
+marks = [55, 38, 91, 67]
+passed = list(filter(lambda m: m >= 40, marks))
+print(passed)`
+      },
+      {
+        id: "assert",
+        title: "Assert Statement",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="8" ry="5" fill="#7afcff"/><text x="7" y="15" font-size="14" fill="#17192b" font-family="monospace" font-weight="700">!</text></svg>`,
+        tag: "Core",
+        theory: `The <b>assert</b> statement tests if a condition is true. If not, raises AssertionError. Used for debugging and checks.`,
+        code: `x = 5
+assert x > 0, "x must be positive"`,
+        real: `# Ensure list is not empty
+data = [1,2,3]
+assert len(data) > 0, "Data list is empty"`
+      },
+      {
+        id: "passing-by-value-reference",
+        title: "Pass by Value vs Reference",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="8" cy="12" rx="5" ry="7" fill="#a16fff"/><ellipse cx="16" cy="12" rx="5" ry="7" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `Mutable objects (lists, dicts) are passed by reference; changes inside functions affect original. Immutable types (int, str, tuple) are passed by value.`,
+        code: `def f(lst):
+    lst.append(4)
+
+nums = [1,2,3]
+f(nums)
+print(nums)  # [1,2,3,4]`,
+        real: `# String is immutable
+def change(s):
+    s += "!"
+s = "Hi"
+change(s)
+print(s)  # "Hi"`
+      },
+      {
+        id: "unpacking",
+        title: "Unpacking",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Core",
+        theory: `Unpacking assigns elements of a collection to variables in a single statement. Works with lists, tuples, etc.`,
+        code: `a, b = (1, 2)
+x, y, z = [3, 4, 5]`,
+        real: `# Swap two variables
+a, b = 5, 7
+a, b = b, a
+print(a, b)`
+      },
+      {
+        id: "formatting",
+        title: "String Formatting",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#a16fff"/><text x="7" y="16" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">{}</text></svg>`,
+        tag: "Core",
+        theory: `Use <b>f-strings</b>, <b>format()</b>, or <b>%</b> for formatting strings. f-strings (Python 3.6+) are concise and fast.`,
+        code: `name = "Ram"
+score = 98
+print(f"{name} scored {score}")
+print("{} scored {}".format(name, score))`,
+        real: `# Show exam result
+def show_result(name, marks):
+    print(f"{name}: {marks}/100")
+
+show_result("Amit", 87)`
+      },
+      {
+        id: "datetime",
+        title: "Date & Time",
+        icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#7afcff"/><rect x="11" y="7" width="2" height="6" rx="1" fill="#a16fff"/><rect x="11" y="12" width="5" height="2" rx="1" fill="#a16fff"/></svg>`,
+        tag: "Core",
+        theory: `The <b>datetime</b> module handles dates and times. Useful for timestamps, time arithmetic, etc.`,
+        code: `import datetime
+now = datetime.datetime.now()
+print(now.strftime("%Y-%m-%d %H:%M"))`,
+        real: `# Check if today is weekend
+import datetime
+today = datetime.datetime.now().weekday()
+if today >= 5:
+    print("It's weekend!")`
+      },
+      {
+        id: "os-sys",
+        title: "OS & Sys Modules",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#a16fff"/><path d="M6 12h12" stroke="#7afcff" stroke-width="2"/></svg>`,
+        tag: "Core",
+        theory: `<b>os</b> module interacts with the operating system. <b>sys</b> handles Python runtime environment, arguments, and more.`,
+        code: `import os
+print(os.listdir("."))  # List files
+
+import sys
+print(sys.version)`,
+        real: `# Read script name
+import sys
+print("Script:", sys.argv[0])`
+      },
+      {
+        id: "json-csv",
+        title: "JSON & CSV Handling",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Core",
+        theory: `Use <b>json</b> and <b>csv</b> modules to read/write structured data files.`,
+        code: `import json
+data = {"name": "Ram"}
+with open("user.json", "w") as f:
+    json.dump(data, f)
+
+import csv
+with open("marks.csv") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)`,
+        real: `# Convert list to JSON string
+import json
+nums = [1,2,3]
+json_str = json.dumps(nums)
+print(json_str)`
+      },
+      {
+        id: "math-random",
+        title: "Math & Random",
+        icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#7afcff"/><rect x="9" y="9" width="6" height="6" rx="3" fill="#a16fff"/></svg>`,
+        tag: "Core",
+        theory: `The <b>math</b> module provides math functions. <b>random</b> module generates random numbers, useful for simulations, games, etc.`,
+        code: `import math
+print(math.pi)
+
+import random
+print(random.randint(1, 10))`,
+        real: `# Roll a dice
+import random
+dice = random.randint(1, 6)
+print("You rolled:", dice)`
+      },
+      {
+        id: "re",
+        title: "Regular Expressions",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="6" rx="3" fill="#a16fff"/><rect x="8" y="11" width="8" height="2" rx="1" fill="#7afcff"/></svg>`,
+        tag: "Core",
+        theory: `The <b>re</b> module handles pattern matching in strings using regular expressions.`,
+        code: `import re
+txt = "Email: devix@python.com"
+match = re.search(r'\\w+@\\w+\\.\\w+', txt)
+if match:
+    print(match.group())`,
+        real: `# Validate phone number
+import re
+mob = "9876543210"
+if re.match(r"^\\d{10}$", mob):
+    print("Valid number")`
+      }
+    ];
+
+    // Advanced Python Topics
+    const advPythonTopics = [
+      {
+        id: "decorators",
+        title: "Decorators",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Decorators are functions that modify the behavior of other functions or classes. Use <b>@decorator</b> syntax.`,
+        code: `def log(func):
+    def wrapper(*a, **kw):
+        print("Calling", func.__name__)
+        return func(*a, **kw)
+    return wrapper
+
+@log
+def greet(name):
+    print("Hello", name)
+
+greet("DeviX")`,
+        real: `# Time function execution
+import time
+def timer(fn):
+    def wrap(*a, **kw):
+        start = time.time()
+        result = fn(*a, **kw)
+        print("Took", time.time()-start, "sec")
+        return result
+    return wrap
+
+@timer
+def slow():
+    time.sleep(1)
+slow()`
+      },
+      {
+        id: "generators",
+        title: "Generators",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Generators yield values using <b>yield</b> keyword. They are memory efficient for large data sequences.`,
+        code: `def count_up(n):
+    for i in range(n):
+        yield i
+
+for num in count_up(3):
+    print(num)`,
+        real: `# Infinite number generator
+def infinite():
+    n = 0
+    while True:
+        yield n
+        n += 1
+
+g = infinite()
+for _ in range(3):
+    print(next(g))`
+      },
+      {
+        id: "iterators",
+        title: "Iterators",
+        icon: `<svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="4" fill="#7afcff"/><rect x="7" y="9" width="10" height="2" rx="1" fill="#a16fff"/><rect x="7" y="13" width="10" height="2" rx="1" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `Iterators implement <b>__iter__()</b> & <b>__next__()</b> methods. Used in for-loops and to traverse containers.`,
+        code: `nums = [1,2,3]
+it = iter(nums)
+print(next(it))
+print(next(it))`,
+        real: `# Custom iterator
+class Reverse:
+    def __init__(self, data):
+        self.data = data
+        self.idx = len(data)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.idx == 0:
+            raise StopIteration
+        self.idx -= 1
+        return self.data[self.idx]
+
+for x in Reverse("ram"):
+    print(x)`
+      },
+      {
+        id: "comprehensions-adv",
+        title: "Advanced Comprehensions",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Comprehensions support nested loops, conditions, and can be used for sets and dicts too.`,
+        code: `matrix = [[i*j for j in range(3)] for i in range(3)]
+odd_squares = {x: x*x for x in range(10) if x%2==1}`,
+        real: `# Create dict from two lists
+keys = ["a", "b"]
+vals = [1, 2]
+d = {k: v for k, v in zip(keys, vals)}
+print(d)`
+      },
+      {
+        id: "context-managers",
+        title: "Context Managers",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#a16fff"/><rect x="7" y="10" width="10" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Context managers handle setup and cleanup, usually with <b>with</b> statement. Implement <b>__enter__</b> and <b>__exit__</b>.`,
+        code: `with open("file.txt") as f:
+    data = f.read()`,
+        real: `# Custom context manager
+class MyCtx:
+    def __enter__(self):
+        print("Start")
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("End")
+
+with MyCtx():
+    print("Inside")`
+      },
+      {
+        id: "property",
+        title: "Property Decorator",
+        icon: `<svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="4" fill="#7afcff"/><rect x="7" y="9" width="10" height="2" rx="1" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `<b>@property</b> lets you define methods as attributes for getting, setting, and deleting values in OOP.`,
+        code: `class Circle:
+    def __init__(self, r):
+        self._r = r
+    @property
+    def area(self):
+        return 3.14 * self._r**2
+
+c = Circle(3)
+print(c.area)`,
+        real: `# Smart temperature class
+class Temp:
+    def __init__(self, c):
+        self._c = c
+    @property
+    def fahrenheit(self):
+        return self._c * 1.8 + 32
+
+t = Temp(0)
+print(t.fahrenheit)`
+      },
+      {
+        id: "staticmethod-classmethod",
+        title: "Static & Class Methods",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><circle cx="12" cy="12" r="4" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `<b>@staticmethod</b> does not access instance/class. <b>@classmethod</b> receives class as the first argument.`,
+        code: `class Demo:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+    @classmethod
+    def whoami(cls):
+        return cls.__name__`,
+        real: `# Factory method with classmethod
+class Person:
+    def __init__(self, name):
+        self.name = name
+    @classmethod
+    def from_dict(cls, d):
+        return cls(d["name"])
+
+user = Person.from_dict({"name": "Ram"})`
+      },
+      {
+        id: "advanced-oop",
+        title: "Advanced OOP Features",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `Python OOP supports multiple inheritance, operator overloading, __str__, __repr__, __slots__, mixins, etc.`,
+        code: `class Vector:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+    def __add__(self, o):
+        return Vector(self.x+o.x, self.y+o.y)
+    def __str__(self):
+        return f"({self.x},{self.y})"`,
+        real: `# Use __slots__ for memory
+class Point:
+    __slots__ = ['x','y']
+    def __init__(self, x, y):
+        self.x, self.y = x, y`
+      },
+      {
+        id: "abstract-classes",
+        title: "Abstract Classes",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Abstract classes can't be instantiated directly. Use <b>abc</b> module and <b>@abstractmethod</b> decorator.`,
+        code: `from abc import ABC, abstractmethod
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass`,
+        real: `# Shape subclass
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+    def area(self):
+        return 3.14 * self.r ** 2`
+      },
+      {
+        id: "design-patterns",
+        title: "Design Patterns",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#a16fff"/><rect x="7" y="10" width="10" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Common Python patterns: Singleton, Factory, Observer, MVC, etc.`,
+        code: `# Singleton
+class Single:
+    _inst = None
+    def __new__(cls):
+        if not cls._inst:
+          cls._inst = super().__new__(cls)
+        return cls._inst`,
+        real: `# Factory
+class Car:
+    def drive(self): print("Drive")
+class Bike:
+    def ride(self): print("Ride")
+def get_vehicle(v):
+    if v == "car": return Car()
+    else: return Bike()
+obj = get_vehicle("car")
+obj.drive()`
+      },
+      {
+        id: "exceptions-adv",
+        title: "Custom Exceptions",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `Define custom exception classes by inheriting from <b>Exception</b>.`,
+        code: `class MyError(Exception):
+    pass
+
+raise MyError("Something went wrong")`,
+        real: `# Validate marks
+class MarksError(Exception): pass
+def check(m):
+    if m < 0 or m > 100:
+        raise MarksError("Invalid marks")
+check(101)`
+      },
+      {
+        id: "logging",
+        title: "Logging",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#a16fff"/><rect x="7" y="10" width="10" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>logging</b> module provides flexible logging for applications.`,
+        code: `import logging
+logging.basicConfig(level=logging.INFO)
+logging.info("Started")`,
+        real: `# Log errors to file
+import logging
+logging.basicConfig(filename="app.log", level=logging.ERROR)
+logging.error("Something failed")`
+      },
+      {
+        id: "regex-adv",
+        title: "Advanced Regex",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `RegEx supports groups, lookahead/lookbehind, named groups, etc.`,
+        code: `import re
+m = re.match(r"(?P<user>\\w+)@(\\w+)", "ram@devix")
+print(m.group("user"))`,
+        real: `# Find all emails
+import re
+text = "Emails: a@x.com, b@y.com"
+emails = re.findall(r"[\\w.-]+@[\\w.-]+", text)
+print(emails)`
+      },
+      {
+        id: "threading",
+        title: "Multithreading",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="8" rx="4" fill="#7afcff"/><rect x="10" y="10" width="4" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>threading</b> module enables running tasks concurrently using threads.`,
+        code: `import threading
+def hello():
+    print("Hello")
+t = threading.Thread(target=hello)
+t.start()
+t.join()`,
+        real: `# Download files concurrently
+import threading
+def download(link):
+    print("Download", link)
+urls = ["a.com", "b.com"]
+threads = []
+for u in urls:
+    th = threading.Thread(target=download, args=(u,))
+    th.start()
+    threads.append(th)
+for th in threads:
+    th.join()`
+      },
+      {
+        id: "multiprocessing",
+        title: "Multiprocessing",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="8" rx="4" fill="#a16fff"/><rect x="10" y="10" width="4" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>multiprocessing</b> module allows true parallelism using multiple processes.`,
+        code: `from multiprocessing import Process
+def work():
+    print("Work")
+p = Process(target=work)
+p.start()
+p.join()`,
+        real: `# Parallel computation
+from multiprocessing import Pool
+def sqr(n): return n*n
+with Pool(3) as pool:
+    print(pool.map(sqr, [1,2,3]))`
+      },
+      {
+        id: "asyncio",
+        title: "Asynchronous Programming",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>asyncio</b> module is used for async I/O, allowing non-blocking code with <b>async</b> and <b>await</b>.`,
+        code: `import asyncio
+async def main():
+    print("Hello")
+asyncio.run(main())`,
+        real: `# Async sleep
+import asyncio
+async def wait():
+    print("Start")
+    await asyncio.sleep(1)
+    print("End")
+asyncio.run(wait())`
+      },
+      {
+        id: "socket",
+        title: "Networking (Socket)",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>socket</b> module enables network communication (TCP/UDP).`,
+        code: `import socket
+s = socket.socket()
+s.connect(("example.com", 80))`,
+        real: `# Simple server
+import socket
+sock = socket.socket()
+sock.bind(("", 9090))
+sock.listen(1)
+conn, addr = sock.accept()
+print("Connected by", addr)`
+      },
+      {
+        id: "http",
+        title: "HTTP Requests",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `Use <b>requests</b> library for HTTP. (Install with <code>pip install requests</code>)`,
+        code: `import requests
+r = requests.get("https://api.github.com")
+print(r.status_code)
+print(r.json())`,
+        real: `# Download a file
+import requests
+url = "https://site.com/file.txt"
+r = requests.get(url)
+with open("file.txt", "wb") as f:
+    f.write(r.content)`
+      },
+      {
+        id: "database",
+        title: "Database Handling (SQLite)",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#a16fff"/><rect x="7" y="10" width="10" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>sqlite3</b> module manages SQLite databases. No setup needed. Use SQL queries with Python.`,
+        code: `import sqlite3
+con = sqlite3.connect("data.db")
+cur = con.cursor()
+cur.execute("CREATE TABLE IF NOT EXISTS users (id INT, name TEXT)")
+cur.execute("INSERT INTO users VALUES (?,?)", (1, "Ram"))
+con.commit()
+cur.close()
+con.close()`,
+        real: `# Read all users
+import sqlite3
+con = sqlite3.connect("data.db")
+cur = con.cursor()
+cur.execute("SELECT * FROM users")
+for row in cur:
+    print(row)
+cur.close()
+con.close()`
+      },
+      {
+        id: "csv-adv",
+        title: "Advanced CSV Handling",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>csv</b> module reads and writes CSV files, supporting DictReader and DictWriter.`,
+        code: `import csv
+with open("data.csv") as f:
+    rows = csv.DictReader(f)
+    for row in rows:
+        print(row)`,
+        real: `# Write CSV file
+import csv
+with open("out.csv", "w", newline="") as f:
+    w = csv.DictWriter(f, fieldnames=["id","name"])
+    w.writeheader()
+    w.writerow({"id": 1, "name": "Ram"})`
+      },
+      {
+        id: "json-adv",
+        title: "Advanced JSON Handling",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>json</b> module can pretty print and handle complex data types with custom encoders/decoders.`,
+        code: `import json
+data = {"a":1,"b":2}
+print(json.dumps(data, indent=2))`,
+        real: `# Custom type to JSON
+import json
+class User:
+    def __init__(self, name):
+        self.name = name
+def encode_user(obj):
+    if isinstance(obj, User):
+        return {"name": obj.name}
+    raise TypeError
+u = User("Ram")
+print(json.dumps(u, default=encode_user))`
+      },
+      {
+        id: "csv-pandas",
+        title: "Data Science with pandas",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>pandas</b> library is used for data analysis. DataFrames allow data manipulation, filtering, aggregation, etc.`,
+        code: `import pandas as pd
+df = pd.read_csv("data.csv")
+print(df.head())
+print(df["score"].mean())`,
+        real: `# Filter rows
+import pandas as pd
+df = pd.DataFrame({"a": [1,2,3]})
+print(df[df["a"] > 1])`
+      },
+      {
+        id: "numpy",
+        title: "NumPy for Arrays",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `NumPy is a fast array-processing library for data science and scientific computing.`,
+        code: `import numpy as np
+arr = np.array([1,2,3])
+print(arr * 2)`,
+        real: `# Array statistics
+import numpy as np
+arr = np.array([1,2,3,4])
+print(arr.mean(), arr.std())`
+      },
+      {
+        id: "matplotlib",
+        title: "Data Visualization (matplotlib)",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `matplotlib is used for plotting and data visualization.`,
+        code: `import matplotlib.pyplot as plt
+plt.plot([1,2,3],[4,5,6])
+plt.show()`,
+        real: `# Bar chart
+import matplotlib.pyplot as plt
+plt.bar(["A", "B"], [3, 7])
+plt.show()`
+      },
+      {
+        id: "flask",
+        title: "Flask Web Framework",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Flask is a lightweight web framework for building web apps and APIs. (Install with <code>pip install flask</code>)`,
+        code: `from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello Flask!"
+
+# Run: app.run()`,
+        real: `# API endpoint
+from flask import Flask, jsonify
+app = Flask(__name__)
+@app.route("/api/data")
+def data():
+    return jsonify({"a": 1, "b": 2})`
+      },
+      {
+        id: "django",
+        title: "Django Web Framework",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `Django is a powerful web framework for large web projects. Includes ORM, auth, admin, etc.`,
+        code: `# Install: pip install django
+# Create project: django-admin startproject mysite
+# Run: python manage.py runserver`,
+        real: `# View function
+from django.http import HttpResponse
+def home(request):
+    return HttpResponse("Welcome")`
+      },
+      {
+        id: "virtualenv",
+        title: "Virtual Environments",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#a16fff"/><rect x="7" y="10" width="10" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Use <b>venv</b> to create isolated environments for dependencies. Activate before installing packages.`,
+        code: `python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\\Scripts\\activate   # Windows`,
+        real: `# Install package
+pip install requests
+deactivate  # Exit venv`
+      },
+      {
+        id: "packaging",
+        title: "Creating Python Packages",
+        icon: `<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="4" fill="#7afcff"/><rect x="7" y="10" width="10" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `Python packages are folders with __init__.py. Use <b>setup.py</b> or <b>pyproject.toml</b> for distribution.`,
+        code: `# setup.py example
+from setuptools import setup
+setup(name="mypkg", version="0.1", packages=["mypkg"])`,
+        real: `# Install locally
+pip install .`
+      },
+      {
+        id: "testing",
+        title: "Testing & pytest",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `Use <b>unittest</b> (built-in) or <b>pytest</b> for automated testing.`,
+        code: `def add(a, b): return a+b
+
+def test_add():
+    assert add(2,3) == 5`,
+        real: `# Run tests with pytest
+# Save as test_app.py
+pytest test_app.py`
+      },
+      {
+        id: "mocking",
+        title: "Mocking",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `The <b>unittest.mock</b> module lets you replace parts of your system under test with mock objects.`,
+        code: `from unittest.mock import Mock
+mock = Mock(return_value=10)
+print(mock())`,
+        real: `# Mock input
+from unittest.mock import patch
+with patch("builtins.input", return_value="Ram"):
+    name = input()
+    print(name)`
+      },
+      {
+        id: "cli-args",
+        title: "Command Line Arguments",
+        icon: `<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="4" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Use <b>sys.argv</b> or <b>argparse</b> for command line arguments.`,
+        code: `import sys
+print(sys.argv)  # List of args
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--name")
+args = parser.parse_args()
+print(args.name)`,
+        real: `# Run: python app.py --name Ram`
+      },
+      {
+        id: "env-vars",
+        title: "Environment Variables",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#a16fff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#7afcff"/></svg>`,
+        tag: "Advanced",
+        theory: `Use <b>os.environ</b> to access environment variables.`,
+        code: `import os
+print(os.environ.get("HOME"))`,
+        real: `# Set env var
+# Linux: export API_KEY=abc
+# Windows: set API_KEY=abc
+import os
+print(os.environ["API_KEY"])`
+      },
+      {
+        id: "typing",
+        title: "Typing & Type Checking",
+        icon: `<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="5" fill="#7afcff"/><text x="10" y="17" font-size="10" fill="#17192b" font-family="monospace" font-weight="700">T</text></svg>`,
+        tag: "Advanced",
+        theory: `The <b>typing</b> module provides static type hints such as List, Dict, Any, Union, etc.`,
+        code: `from typing import List, Dict
+nums: List[int] = [1,2,3]
+user: Dict[str, str] = {"name": "Ram"}`,
+        real: `# Type checker: mypy
+# Install: pip install mypy
+# Run: mypy app.py`
+      },
+      {
+        id: "c-extensions",
+        title: "Writing C Extensions",
+        icon: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" fill="#7afcff"/><rect x="8" y="10" width="8" height="4" rx="2" fill="#a16fff"/></svg>`,
+        tag: "Advanced",
+        theory: `Write Python modules in C for performance. Use <b>ctypes</b> or <b>cffi</b> to call C code.`,
+        code: `# example.c
+# compile: gcc -shared -o example.so -fPIC example.c
+import ctypes
+lib = ctypes.CDLL("./example.so")`,
+        real: `# Use numpy for fast math instead of C
+import numpy as np
+print(np.sum([1,2,3,4]))`
+      }
+    ];
+
+    // --- Sidebar Population ---
+    function makeSidebarList(topics, section) {
+      return topics.map(t =>
+        `<li><a href="#${t.id}" data-topic="${t.id}">${t.icon} ${t.title}</a></li>`
+      ).join('');
     }
-}</code></pre>
-                    </div>
-                    <div class="code-explanation">
-                        <p><strong>Explanation:</strong> This is the simplest Java program. The <code>main</code> method is the entry point of any Java application. <code>System.out.println</code> prints text to the console.</p>
-                    </div>
-                    <div class="real-life-example">
-                        <h4><i class="fas fa-lightbulb"></i> Real-life Example</h4>
-                        <p>Java is widely used in enterprise applications, Android app development, and large-scale systems like banking applications.</p>
-                    </div>
-                </div>
+    document.getElementById('coreTopics').innerHTML = makeSidebarList(corePythonTopics, 'core');
+    document.getElementById('advTopics').innerHTML = makeSidebarList(advPythonTopics, 'adv');
 
-                <!-- Additional Java topics would go here (same as original) -->
-                <!-- Python Topics (same as before) -->
-                <div class="topic-card python-topic hidden" id="intro">
-                    <div class="topic-header">
-                        <div class="topic-icon"><i class="fab fa-python"></i></div>
-                        <h3 class="topic-title">Python Introduction</h3>
-                    </div>
-                    <p>Python is a high-level, interpreted programming language known for its simplicity and readability.</p>
-                    <div class="code-container">
-                        <div class="code-header">
-                            <span>hello_world.py</span>
-                            <button class="copy-btn"><i class="far fa-copy"></i> Copy</button>
-                        </div>
-                        <pre><code>print("Hello, World!")</code></pre>
-                    </div>
-                    <div class="code-explanation">
-                        <p><strong>Explanation:</strong> Python programs are simple and concise. The <code>print()</code> function outputs text to the console. Unlike Java, no class definition or main method is required.</p>
-                    </div>
-                    <div class="real-life-example">
-                        <h4><i class="fas fa-lightbulb"></i> Real-life Example</h4>
-                        <p>Python is widely used in data science, web development (Django, Flask), automation, artificial intelligence, and scientific computing.</p>
-                    </div>
-                </div>
+    // --- Cards Population ---
+    function codeBlockHTML(code, id) {
+      // Basic Python syntax highlight: keywords, numbers, strings, comments
+      const kw = /\b(class|def|return|if|else|elif|for|while|with|try|except|finally|import|from|as|pass|break|continue|print|yield|lambda|assert|raise|in|is|not|or|and|True|False|None)\b/g;
+      const num = /\b(\d+(\.\d+)?)\b/g;
+      const str = /('[^']*'|"[^"]*")/g;
+      const com = /(#.*)/g;
+      let html = code.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+      html = html.replace(com, `<span style="color:#5ee7c5;">$1</span>`)
+                 .replace(str, `<span style="color:#ffe261;">$1</span>`)
+                 .replace(kw, `<span style="color:#a16fff;">$1</span>`)
+                 .replace(num, `<span style="color:#7afcff;">$1</span>`);
+      return `<div class="code-block">
+        <button class="copy-btn" data-code-id="${id}" title="Copy code">
+          <svg viewBox="0 0 20 20"><rect x="4" y="5" width="10" height="10" rx="2" fill="#23244d"/><rect x="7" y="8" width="8" height="8" rx="2" fill="#a16fff"/></svg> Copy
+        </button>
+        <pre><code>${html}</code></pre>
+      </div>`;
+    }
 
-                <!-- Additional Python topics would go here (same as original) -->
-            </div>
-        </section>
-
-        <!-- Branches Section -->
-        <section id="branches" class="branches-section">
-            <h2>Our Branches in Indore</h2>
-            <p>With 4 conveniently located branches across Indore, we're always nearby to help you with your computer education needs.</p>
-            
-            <div class="branches-grid">
-                <div class="branch-card">
-                    <div class="branch-header">
-                        <div class="branch-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <h3>Vijay Nagar</h3>
-                    </div>
-                    <p>Samyak's flagship branch in the heart of Vijay Nagar, equipped with state-of-the-art computer labs and experienced faculty.</p>
-                    <div class="branch-info">
-                        <p><i class="fas fa-clock"></i> 9:00 AM - 8:00 PM</p>
-                        <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-                        <p><i class="fas fa-map-pin"></i> 123, Main Road, Vijay Nagar, Indore</p>
-                    </div>
-                </div>
-                
-                <div class="branch-card">
-                    <div class="branch-header">
-                        <div class="branch-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <h3>Geeta Bhawan</h3>
-                    </div>
-                    <p>Our Geeta Bhawan branch specializes in programming courses with a focus on practical implementation and project work.</p>
-                    <div class="branch-info">
-                        <p><i class="fas fa-clock"></i> 9:00 AM - 8:00 PM</p>
-                        <p><i class="fas fa-phone"></i> +91 98765 43211</p>
-                        <p><i class="fas fa-map-pin"></i> 456, Geeta Bhawan Road, Indore</p>
-                    </div>
-                </div>
-                
-                <div class="branch-card">
-                    <div class="branch-header">
-                        <div class="branch-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <h3>Bhawarkua</h3>
-                    </div>
-                    <p>The Bhawarkua branch offers a wide range of computer courses with flexible timings to accommodate students and working professionals.</p>
-                    <div class="branch-info">
-                        <p><i class="fas fa-clock"></i> 9:00 AM - 8:00 PM</p>
-                        <p><i class="fas fa-phone"></i> +91 98765 43212</p>
-                        <p><i class="fas fa-map-pin"></i> 789, Bhawarkua Square, Indore</p>
-                    </div>
-                </div>
-                
-                <div class="branch-card">
-                    <div class="branch-header">
-                        <div class="branch-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <h3>Annapurna</h3>
-                    </div>
-                    <p>Our Annapurna branch focuses on beginner-friendly courses with special attention to individual student needs and progress.</p>
-                    <div class="branch-info">
-                        <p><i class="fas fa-clock"></i> 9:00 AM - 8:00 PM</p>
-                        <p><i class="fas fa-phone"></i> +91 98765 43213</p>
-                        <p><i class="fas fa-map-pin"></i> 321, Annapurna Road, Indore</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Coaching Details Section -->
-        <section id="coaching-details" class="coaching-details">
-            <h2>Why Choose Samyak Computer Classes?</h2>
-            <p>With over a decade of experience in computer education, we offer the best learning environment for aspiring programmers.</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                    <h3>Expert Faculty</h3>
-                    <p>Learn from industry experts with 10+ years of teaching experience</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
-                    <h3>Modern Labs</h3>
-                    <p>State-of-the-art computer labs with latest software and hardware</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
-                    <h3>Placement Assistance</h3>
-                    <p>100% placement assistance with tie-ups with leading IT companies</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-certificate"></i></div>
-                    <h3>Certification</h3>
-                    <p>Industry-recognized certification upon course completion</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-book"></i></div>
-                    <h3>Study Material</h3>
-                    <p>Comprehensive study material and practical examples</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Flexible Timings</h3>
-                    <p>Batch timings suitable for students and working professionals</p>
-                </div>
-            </div>
-            
-            <div class="course-features" style="margin-top: 3rem;">
-                <h3>Course Features</h3>
-                <ul>
-                    <li>Duration: 3 months (Java) / 2.5 months (Python)</li>
-                    <li>Mode: Online & Offline both available</li>
-                    <li>Class Schedule: Weekday & Weekend batches</li>
-                    <li>Practical Sessions: 70% practical, 30% theory</li>
-                    <li>Projects: 2 major projects and 5 mini-projects</li>
-                    <li>Doubt Sessions: Regular doubt clearing sessions</li>
-                    <li>Tests: Weekly tests and mock interviews</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="projects-section">
-            <h2>Capstone Projects</h2>
-            <div class="project-card">
-                <h3><i class="fas fa-project-diagram project-icon"></i> Java Project: E-Commerce Inventory System</h3>
-                <ul>
-                    <li>Design a product class with attributes like ID, name, price, and quantity</li>
-                    <li>Implement CRUD operations for inventory management</li>
-                    <li>Add search and filter functionality</li>
-                    <li>Implement file I/O to persist inventory data</li>
-                    <li>Add user authentication and authorization</li>
-                    <li>Create a GUI using JavaFX or Swing</li>
-                    <li>Implement database connectivity with JDBC</li>
-                </ul>
-            </div>
-            <div class="project-card python-project">
-                <h3><i class="fas fa-project-diagram project-icon"></i> Python Project: Weather CLI Application</h3>
-                <ul>
-                    <li>Use the requests library to fetch data from a weather API</li>
-                    <li>Create a command-line interface using argparse</li>
-                    <li>Display current weather and forecast for a given city</li>
-                    <li>Implement error handling for invalid cities or network issues</li>
-                    <li>Add unit tests for core functionality</li>
-                    <li>Create a GUI version using Tkinter or PyQt</li>
-                    <li>Add data visualization using matplotlib</li>
-                </ul>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container footer-content">
-            <div class="footer-section">
-                <h3>Samyak Computer Classes</h3>
-                <p>Providing quality computer education in Indore since 2010. Our mission is to make students industry-ready with practical knowledge and hands-on experience.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#course-content">Course Content</a></li>
-                    <li><a href="#branches">Our Branches</a></li>
-                    <li><a href="#coaching-details">Coaching Details</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <p><i class="fas fa-headset"></i> Helpline: +91 97544 12345</p>
-                <p><i class="fas fa-envelope"></i> info@samyakindore.com</p>
-                <p><i class="fas fa-globe"></i> www.samyakindore.com</p>
-                <div class="social-links" style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
+    function makeCard(t, idx, section="core") {
+      // Each card for a topic
+      let id = t.id;
+      let codeHTML = codeBlockHTML(t.code, id+"-code");
+      let realHTML = codeBlockHTML(t.real, id+"-real");
+      return `<section class="card" id="${id}">
+        <div class="card-header">
+          <div class="card-icon">${t.icon}</div>
+          <span class="card-title">${t.title}</span>
+          <span class="card-tag">${t.tag}</span>
         </div>
-        <div class="copyright">
-            <p>&copy; 2023 Samyak Computer Classes. All rights reserved.</p>
+        <div class="card-section">
+          <div class="section-title">Theory & Explanation</div>
+          <div class="theory">${t.theory}</div>
         </div>
-    </footer>
+        <div class="card-section">
+          <div class="section-title">Code Snippet</div>
+          ${codeHTML}
+        </div>
+        <div class="card-section">
+          <div class="section-title">Real-life Example</div>
+          <div class="reallife">${realHTML}</div>
+        </div>
+      </section>`;
+    }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tab functionality
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const javaTopics = document.querySelectorAll('.java-topic');
-            const pythonTopics = document.querySelectorAll('.python-topic');
-            
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const tab = button.dataset.tab;
-                    
-                    // Update active tab
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    
-                    // Show relevant topics
-                    if (tab === 'java') {
-                        javaTopics.forEach(topic => topic.classList.remove('hidden'));
-                        pythonTopics.forEach(topic => topic.classList.add('hidden'));
-                    } else {
-                        javaTopics.forEach(topic => topic.classList.add('hidden'));
-                        pythonTopics.forEach(topic => topic.classList.remove('hidden'));
-                    }
-                });
-            });
-            
-            // Copy button functionality
-            const copyButtons = document.querySelectorAll('.copy-btn');
-            
-            copyButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const codeBlock = button.parentElement.nextElementSibling;
-                    const textToCopy = codeBlock.textContent;
-                    
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        // Show toast notification
-                        const toast = document.createElement('div');
-                        toast.classList.add('toast');
-                        toast.textContent = 'Code copied to clipboard!';
-                        document.body.appendChild(toast);
-                        
-                        // Remove toast after animation
-                        setTimeout(() => {
-                            document.body.removeChild(toast);
-                        }, 3000);
-                    }).catch(err => {
-                        console.error('Failed to copy: ', err);
-                    });
-                });
-            });
-            
-            // Search functionality
-            const searchInput = document.getElementById('search-input');
-            const searchBtn = document.getElementById('search-btn');
-            
-            searchBtn.addEventListener('click', performSearch);
-            searchInput.addEventListener('keyup', (e) => {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
-            });
-            
-            function performSearch() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const activeTab = document.querySelector('.tab-button.active').dataset.tab;
-                const topics = document.querySelectorAll(`.${activeTab}-topic`);
-                
-                topics.forEach(topic => {
-                    const title = topic.querySelector('.topic-title').textContent.toLowerCase();
-                    const description = topic.querySelector('p').textContent.toLowerCase();
-                    
-                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                        topic.classList.remove('hidden');
-                        topic.classList.add('fade-in');
-                    } else {
-                        topic.classList.add('hidden');
-                    }
-                });
-            }
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+    function renderContent() {
+      let html = `<a id="core-python"></a>`;
+      corePythonTopics.forEach((t, i) => { html += makeCard(t, i, 'core'); });
+      html += `<a id="advanced-python"></a>`;
+      advPythonTopics.forEach((t, i) => { html += makeCard(t, i, 'adv'); });
+      html += `<a id="about"></a>
+      <section class="card" id="about-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#7afcff"/><rect x="9" y="9" width="6" height="6" rx="3" fill="#a16fff"/></svg>
+          </div>
+          <span class="card-title">About This Course</span>
+          <span class="card-tag">Info</span>
+        </div>
+        <div class="card-section">
+          <div class="theory">
+            Welcome to <b>Full Python Course — Ram sir | DeviX Solutions</b>!<br>
+            This course covers <b>core</b> and <b>advanced</b> Python topics. Each topic includes theory, code, and practical examples, all in a modern, beautiful dark-themed site.<br>
+            <br>
+            <b>How to use:</b> <br>
+            • Use the <span style="color:#7afcff;">sidebar</span> to jump to any topic.<br>
+            • Copy code by clicking the <b>Copy</b> button.<br>
+            • Enjoy smooth navigation and study at your own pace.<br>
+            <br>
+            <b>Made with ❤️ by Ram sir at DeviX Solutions, 2025.</b>
+          </div>
+        </div>
+      </section>`;
+      document.getElementById('mainContent').innerHTML = html;
+    }
+    renderContent();
+
+    // --- Sidebar Active State & Scroll ---
+    function setActiveSidebar() {
+      let hash = window.location.hash.substring(1);
+      let allLinks = document.querySelectorAll('.sidebar ul li');
+      allLinks.forEach(li => li.classList.remove('active'));
+      if(hash) {
+        let activeLi = document.querySelector(`.sidebar a[data-topic="${hash}"]`);
+        if(activeLi) activeLi.parentElement.classList.add('active');
+      }
+    }
+    window.addEventListener('hashchange', setActiveSidebar);
+    setActiveSidebar();
+
+    // --- Navbar Highlight ---
+    function setNavActive() {
+      let hash = window.location.hash;
+      let navs = document.querySelectorAll('.navlinks a');
+      navs.forEach(a => a.classList.remove('active'));
+      if(hash.includes('advanced')) {
+        navs[1].classList.add('active');
+      } else if(hash.includes('about')) {
+        navs[2].classList.add('active');
+      } else {
+        navs[0].classList.add('active');
+      }
+    }
+    window.addEventListener('hashchange', setNavActive);
+    setNavActive();
+
+    // --- Sidebar Toggle on Mobile ---
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    function closeSidebarOnNav() {
+      if(window.innerWidth < 900) sidebar.classList.remove('show');
+    }
+    sidebarToggle.onclick = function() {
+      sidebar.classList.toggle('show');
+    };
+    sidebar.addEventListener('click', function(e) {
+      if(e.target.tagName === 'A') closeSidebarOnNav();
+    });
+    window.addEventListener('resize', () => {
+      if(window.innerWidth >= 900) sidebar.classList.remove('show');
+    });
+
+    // --- Smooth Scroll for Sidebar/Nav ---
+    document.querySelectorAll('.sidebar a, .navlinks a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        let to = this.getAttribute('href');
+        if(to && to.startsWith('#')) {
+          e.preventDefault();
+          let el = document.querySelector(to);
+          if(el) {
+            window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: "smooth" });
+            history.replaceState(null, null, to);
+          }
+        }
+      });
+    });
+
+    // --- Copy Button ---
+    document.addEventListener('click', function(e) {
+      if(e.target.closest('.copy-btn')) {
+        let btn = e.target.closest('.copy-btn');
+        let codeId = btn.getAttribute('data-code-id');
+        let codeBlock = btn.parentElement.querySelector('pre code');
+        let text = codeBlock.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          btn.innerHTML = `<svg viewBox="0 0 20 20"><rect x="4" y="5" width="10" height="10" rx="2" fill="#23244d"/><rect x="7" y="8" width="8" height="8" rx="2" fill="#7afcff"/></svg> Copied!`;
+          setTimeout(() => {
+            btn.innerHTML = `<svg viewBox="0 0 20 20"><rect x="4" y="5" width="10" height="10" rx="2" fill="#23244d"/><rect x="7" y="8" width="8" height="8" rx="2" fill="#a16fff"/></svg> Copy`;
+          }, 1100);
         });
-    </script>
+      }
+    });
+
+    // --- Animate Cards on Scroll ---
+    function animateCardsOnScroll() {
+      let cards = document.querySelectorAll('.card');
+      let winH = window.innerHeight;
+      cards.forEach(card => {
+        let rect = card.getBoundingClientRect();
+        if(rect.top < winH - 60) card.style.opacity = 1;
+        else card.style.opacity = 0.6;
+      });
+    }
+    window.addEventListener('scroll', animateCardsOnScroll);
+    animateCardsOnScroll();
+
+    // --- Responsive Sidebar Auto-hide on Nav ---
+    window.addEventListener('hashchange', closeSidebarOnNav);
+
+    // --- Keyboard Navigation ---
+    document.addEventListener('keyup', function(e) {
+      if(e.key === "Escape" && window.innerWidth < 900) sidebar.classList.remove('show');
+    });
+
+    // --- Accessibility: Focus on content after nav ---
+    document.querySelectorAll('.sidebar a, .navlinks a').forEach(link => {
+      link.addEventListener('click', function() {
+        setTimeout(() => {
+          let hash = this.getAttribute('href');
+          if(hash && document.querySelector(hash))
+            document.querySelector(hash).focus();
+        }, 500);
+      });
+    });
+  </script>
 </body>
 </html>
