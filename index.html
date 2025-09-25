@@ -83,62 +83,6 @@
     }
     .sidebar.hide { left: -320px; }
 
-    @media (max-width: 900px) {
-      .sidebar {
-        position: fixed;
-        top: 66px;
-        left: -350px;
-        height: calc(100vh - 66px);
-        z-index: 100;
-        box-shadow: 2px 0 18px #0004;
-        transition: left 0.35s cubic-bezier(.41,1.72,.68,.91);
-      }
-      .sidebar.show { left: 0; }
-      .container { flex-direction: column; }
-    }
-
-    .sidebar h2 {
-      color: #a16fff;
-      font-size: 1.15em;
-      padding: 10px 30px 6px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      margin-bottom: 5px;
-      user-select: none;
-    }
-    .sidebar ul {
-      list-style: none;
-      max-height: 900px;
-      padding: 0 4px 0 20px;
-    }
-    .sidebar ul li {
-      margin-bottom: 6px;
-      border-left: 3px solid transparent;
-      transition: border 0.2s;
-    }
-    .sidebar ul li.active,
-    .sidebar ul li:hover {
-      border-left: 3px solid #7afcff;
-      background: #212154;
-    }
-    .sidebar ul li a {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      color: #e3e7ef;
-      padding: 6px 12px 6px 0;
-      border-radius: 6px;
-      font-size: 1em;
-      transition: background 0.13s, color 0.13s;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .sidebar ul li a svg {
-      width: 18px; height: 18px; vertical-align: middle;
-      fill: #7afcff;
-    }
-
     /* Sidebar Toggle */
     .sidebar-toggle {
       display: none;
@@ -151,11 +95,6 @@
       cursor: pointer;
       z-index: 200;
     }
-    @media (max-width: 900px) {
-      .sidebar-toggle {
-        display: block;
-      }
-    }
 
     /* Main content */
     .main-content {
@@ -166,10 +105,6 @@
       gap: 40px;
       min-width: 0;
       transition: padding 0.3s;
-    }
-    @media (max-width: 600px) {
-      .main-content { padding: 18px 5vw 40px 5vw; }
-      .sidebar { width: 86vw; }
     }
 
     /* Topic Card */
@@ -289,25 +224,6 @@
     .copy-btn:active { opacity: 0.67; }
     .copy-btn svg { width: 1.1em; height: 1.1em; fill: #222349; }
 
-    /* Responsive */
-    @media (max-width: 800px) {
-      .card { padding: 20px 10px 14px 12px; }
-      .main-content { gap: 23px; }
-    }
-    @media (max-width: 600px) {
-      .card { padding: 13px 3vw 10px 4vw; }
-      .main-content { padding: 8px 0 30px 0; }
-      .navbar { padding: 9px 3vw; }
-    }
-
-    /* Animations */
-    .sidebar,
-    .main-content,
-    .card { transition: background 0.25s, box-shadow 0.25s; }
-
-    /* SVG Icon Style */
-    .card-icon svg, .sidebar svg { display: inline-block; vertical-align: middle; }
-
     /* Misc */
     .footer {
       font-size: 1em;
@@ -319,6 +235,290 @@
     .sidebar .sidebar-section {
       margin-bottom: 25px;
     }
+
+    /* ========== RESPONSIVE DESIGN ========== */
+    
+    /* Large screens (TVs, large desktops) */
+    @media (min-width: 1400px) {
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .sidebar {
+        width: 350px;
+      }
+      .card {
+        max-width: 1100px;
+      }
+      .main-content {
+        padding: 40px 60px 60px 60px;
+      }
+    }
+
+    /* Standard laptops and desktops */
+    @media (max-width: 1200px) {
+      .navbar {
+        padding: 18px 20px;
+      }
+      .sidebar {
+        width: 280px;
+      }
+      .main-content {
+        padding: 30px 30px 50px 30px;
+      }
+      .card {
+        padding: 28px 24px 24px 26px;
+      }
+    }
+
+    /* Tablets and small laptops */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        position: fixed;
+        top: 66px;
+        left: -350px;
+        width: 320px;
+        height: calc(100vh - 66px);
+        z-index: 100;
+        box-shadow: 2px 0 18px #0004;
+        transition: left 0.35s cubic-bezier(.41,1.72,.68,.91);
+      }
+      .sidebar.show { left: 0; }
+      
+      .sidebar-toggle {
+        display: block;
+      }
+      
+      .main-content {
+        padding: 20px 20px 40px 20px;
+      }
+      
+      .card {
+        padding: 20px 16px 16px 18px;
+        margin-bottom: 20px;
+      }
+      
+      .navbar .brand {
+        font-size: 1.4em;
+      }
+      .navbar .navlinks {
+        gap: 15px;
+      }
+    }
+
+    /* Large phones and small tablets */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 15px 15px;
+      }
+      
+      .navbar .brand {
+        font-size: 1.3em;
+        gap: 10px;
+      }
+      
+      .navbar .brand svg {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .navbar .navlinks {
+        gap: 12px;
+      }
+      
+      .navbar .navlinks a {
+        font-size: 0.95em;
+      }
+      
+      .sidebar {
+        width: 280px;
+      }
+      
+      .main-content {
+        padding: 15px 15px 30px 15px;
+        gap: 25px;
+      }
+      
+      .card {
+        padding: 18px 12px 12px 14px;
+        border-radius: 12px;
+      }
+      
+      .card .card-header {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .card .card-header .card-title {
+        font-size: 1.15em;
+      }
+      
+      .card .card-header .card-tag {
+        margin-left: 0;
+      }
+      
+      .card .section-title {
+        font-size: 1em;
+      }
+      
+      .card .theory, .card .reallife {
+        font-size: 0.95em;
+      }
+      
+      .code-block pre {
+        font-size: 0.9em;
+        padding: 15px 10px 10px 12px;
+      }
+    }
+
+    /* Small phones */
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 12px 10px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .navbar .brand {
+        font-size: 1.2em;
+        order: 2;
+        flex: 1;
+        justify-content: center;
+      }
+      
+      .sidebar-toggle {
+        order: 1;
+        margin-right: 0;
+      }
+      
+      .navbar .navlinks {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 5px;
+        gap: 10px;
+      }
+      
+      .navbar .navlinks a {
+        font-size: 0.9em;
+      }
+      
+      .sidebar {
+        width: 100%;
+        left: -100%;
+      }
+      
+      .sidebar.show { left: 0; }
+      
+      .main-content {
+        padding: 10px 8px 20px 8px;
+        gap: 20px;
+      }
+      
+      .card {
+        padding: 15px 8px 10px 10px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+      
+      .card .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      
+      .card .card-header .card-icon {
+        padding: 6px;
+      }
+      
+      .card .card-header .card-title {
+        font-size: 1.1em;
+      }
+      
+      .card .theory, .card .reallife {
+        font-size: 0.9em;
+      }
+      
+      .code-block pre {
+        font-size: 0.85em;
+        padding: 12px 8px 8px 10px;
+      }
+      
+      .copy-btn {
+        padding: 3px 8px 3px 6px;
+        font-size: 0.9em;
+        right: 10px;
+        top: 8px;
+      }
+      
+      .footer {
+        padding: 20px 0 10px;
+        font-size: 0.9em;
+      }
+    }
+
+    /* Very small phones */
+    @media (max-width: 320px) {
+      .navbar .brand {
+        font-size: 1.1em;
+      }
+      
+      .navbar .navlinks a {
+        font-size: 0.85em;
+      }
+      
+      .card .card-header .card-title {
+        font-size: 1em;
+      }
+      
+      .card .theory, .card .reallife {
+        font-size: 0.85em;
+      }
+      
+      .code-block pre {
+        font-size: 0.8em;
+      }
+    }
+
+    /* Landscape orientation for phones */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .navbar {
+        padding: 10px 15px;
+      }
+      
+      .sidebar {
+        top: 60px;
+        height: calc(100vh - 60px);
+      }
+      
+      .card {
+        padding: 12px 10px 8px 10px;
+        margin-bottom: 10px;
+      }
+      
+      .card .card-section {
+        margin-bottom: 10px;
+      }
+      
+      .card .section-title {
+        margin-bottom: 5px;
+      }
+      
+      .code-block {
+        margin: 8px 0 10px 0;
+      }
+    }
+
+    /* Animations */
+    .sidebar,
+    .main-content,
+    .card { transition: background 0.25s, box-shadow 0.25s; }
+
+    /* SVG Icon Style */
+    .card-icon svg, .sidebar svg { display: inline-block; vertical-align: middle; }
   </style>
 </head>
 <body>
